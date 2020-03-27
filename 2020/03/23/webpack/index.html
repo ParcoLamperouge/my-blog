@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Webpack笔记</title>
+    <meta name="description" content="This is a blog example built by VuePress">
+    
+    
+    <link rel="preload" href="/my-blog/assets/css/0.styles.8a0c1625.css" as="style"><link rel="preload" href="/my-blog/assets/js/app.00e6554a.js" as="script"><link rel="preload" href="/my-blog/assets/js/3.97d5ca3e.js" as="script"><link rel="preload" href="/my-blog/assets/js/4.335d7e7a.js" as="script"><link rel="preload" href="/my-blog/assets/js/16.b2ffbaf1.js" as="script"><link rel="prefetch" href="/my-blog/assets/js/10.489a188f.js"><link rel="prefetch" href="/my-blog/assets/js/11.c1f2b24b.js"><link rel="prefetch" href="/my-blog/assets/js/12.7d54f06a.js"><link rel="prefetch" href="/my-blog/assets/js/13.c420d301.js"><link rel="prefetch" href="/my-blog/assets/js/14.a1b7eced.js"><link rel="prefetch" href="/my-blog/assets/js/15.a39f8141.js"><link rel="prefetch" href="/my-blog/assets/js/17.864bf645.js"><link rel="prefetch" href="/my-blog/assets/js/18.6de35033.js"><link rel="prefetch" href="/my-blog/assets/js/19.95bbd979.js"><link rel="prefetch" href="/my-blog/assets/js/20.27d3047a.js"><link rel="prefetch" href="/my-blog/assets/js/5.3e4de9b6.js"><link rel="prefetch" href="/my-blog/assets/js/6.e77bc436.js"><link rel="prefetch" href="/my-blog/assets/js/7.4d088fb6.js"><link rel="prefetch" href="/my-blog/assets/js/8.dbfd4680.js"><link rel="prefetch" href="/my-blog/assets/js/9.e9277fd6.js"><link rel="prefetch" href="/my-blog/assets/js/vuejs-paginate.f2583a06.js">
+    <link rel="stylesheet" href="/my-blog/assets/css/0.styles.8a0c1625.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuperess-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/my-blog/my-blog/" class="nav-link home-link">
+        </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/my-blog/" class="nav-link">List</a></li><li class="nav-item"><a href="/my-blog/tag/" class="nav-link">Tags</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div></div></div></header> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/my-blog/my-blog/" class="nav-link mobile-home-link">
+      </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/my-blog/" class="nav-link">List</a></li><li class="mobile-nav-item"><a href="/my-blog/tag/" class="nav-link">Tags</a></li></ul></div></div></div></section> <div class="content-wrapper"><div id="vuperess-theme-blog__post-layout"><div class="vuepress-blog-theme-content content__default"><h1 id="webpack笔记"><a href="#webpack笔记" aria-hidden="true" class="header-anchor">#</a> Webpack笔记</h1> <h2 id="webpack支持的模块化规范："><a href="#webpack支持的模块化规范：" aria-hidden="true" class="header-anchor">#</a> Webpack支持的模块化规范：</h2> <ul><li>COMMONJS</li> <li>AMD</li> <li>ES6 Module</li></ul> <hr> <h2 id="concept"><a href="#concept" aria-hidden="true" class="header-anchor">#</a> Concept</h2> <p>entry 指定入口文件</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    entry<span class="token punctuation">:</span> <span class="token string">'./app.js'</span>
+    entry<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        app<span class="token punctuation">:</span> <span class="token string">'./main.js'</span><span class="token punctuation">,</span>
+        app2<span class="token punctuation">:</span> <span class="token string">'./xxxx.js'</span>
+    <span class="token punctuation">}</span>
+    
+<span class="token punctuation">}</span>
+
+output
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        filename<span class="token punctuation">:</span> <span class="token string">'./js/[name].[hash:6][id].js'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="loader"><a href="#loader" aria-hidden="true" class="header-anchor">#</a> loader</h3> <p>对不同文件格式进行不同的处理</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code>module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.vue$/</span><span class="token punctuation">,</span>
+        loader<span class="token punctuation">:</span> <span class="token string">'vue-loader'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> vueLoaderConfig
+      <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="plugin"><a href="#plugin" aria-hidden="true" class="header-anchor">#</a> plugin</h3> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code>plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>PurifyCSS</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>babel-preset
+存储JavaScript不同标准的插件</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code>rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token operator">...</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        presets<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token string">'@babel/preset-env'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+            target<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                browsers<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'&gt;1%'</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><hr> <h3 id="语法糖编译"><a href="#语法糖编译" aria-hidden="true" class="header-anchor">#</a> 语法糖编译</h3> <p>安装对应的loader （vue-loader， jsx-loader）
+在webpack.config.js中写入对应的loader处理
+根据loader规则写配置</p> <p>eg.
+引入ts</p> <div class="language-sh extra-class"><pre class="language-sh"><code>cnpm <span class="token function">install</span> typescript ts-loader --save-dev
+</code></pre></div><div class="language-JavaScript extra-class"><pre class="language-javascript"><code>rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.tsx?$/</span><span class="token punctuation">,</span>
+        loader<span class="token punctuation">:</span> <span class="token string">'ts-loader'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> vueLoaderConfig
+      <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+    
+</code></pre></div><p>fsconfig.json</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token punctuation">{</span>
+    <span class="token string">&quot;compilerOptions&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;module&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;target&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;es5&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;exclude&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./node_modules&quot;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="css编译"><a href="#css编译" aria-hidden="true" class="header-anchor">#</a> css编译</h2> <p>依赖: css-loader style-loader （有先后）</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code>rules<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    test<span class="token punctuation">:</span><span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
+    use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            loader<span class="token punctuation">:</span> <span class="token string">'style-loader'</span>，
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                insertAt<span class="token punctuation">:</span> <span class="token string">'top'</span><span class="token punctuation">,</span> <span class="token string">'bottom'</span><span class="token punctuation">,</span>
+                insertInto<span class="token punctuation">:</span> <span class="token string">'#myDiv'</span><span class="token punctuation">,</span>
+                singleton<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                transform<span class="token punctuation">:</span><span class="token string">'./transform.js'</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            loader<span class="token punctuation">:</span> <span class="token string">'css-loader'</span>，
+            modules<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><ul><li>loader是从后往前执行</li></ul> <p>transform.js</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code>module<span class="token punctuation">.</span><span class="token function-variable function">exports</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">css</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>screen<span class="token punctuation">.</span>width <span class="token operator">&lt;</span> <span class="token number">500</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    css <span class="token operator">=</span> css<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'yellow'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span> 
+<span class="token keyword">return</span> css
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="style-loader"><a href="#style-loader" aria-hidden="true" class="header-anchor">#</a> style-loader</h3> <p>核心配置：</p> <ul><li>nsertAt 指定区域</li> <li>inserInto 指定dom</li> <li>singleton 合并style标签</li> <li>transform 插入style到页面前，用js操作</li></ul> <p>css-loader</p> <ul><li>module 模块化</li> <li>minimize css4已移除</li> <li>alias css4已移除</li></ul> <p>html 编译</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token keyword">var</span> htmlWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span>'html<span class="token operator">-</span>webpack<span class="token operator">-</span>plugin<span class="token punctuation">)</span>
+
+plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">new</span> <span class="token class-name">htmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        filename<span class="token punctuation">:</span> <span class="token string">'index.html'</span><span class="token punctuation">,</span>
+        template<span class="token punctuation">:</span> <span class="token string">'./index.html'</span><span class="token punctuation">,</span>
+        minify<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            collapseWhitespace<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">//压缩</span>
+        inject<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">//不自动引入css，</span>
+        chuncks<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'app'</span><span class="token punctuation">]</span><span class="token comment">//entry不唯一时，指定一个入口文件</span>
+        
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span>
+
+</code></pre></div><hr> <p>热更新</p> <p>hot:true
+hotOnly: true
+(只会热更新css)
+如果需要热更新js
+js中加入下面代码
+if (module.hot) {
+module.hot.accept();
+}</p> <hr> <p>webpack环境配置区别
+指定打包文件
+# webpack --config webpack.common.js --env [env_name]</p> <hr> <p>webpack原理
+依赖Node环境与文件操作系统
+利用node读取文件，字符串处理，再利用node写入文件</p> <p>工作顺序：
+读取配置文件
+注册内部插件与配置插件
+loader编译
+按引入顺序组织模块
+生成导出文件</p> <hr> <h2 id="代码分割"><a href="#代码分割" aria-hidden="true" class="header-anchor">#</a> 代码分割</h2> <h3 id="多页面应用："><a href="#多页面应用：" aria-hidden="true" class="header-anchor">#</a> 多页面应用：</h3> <ul><li>主业务代码</li> <li>公共依赖</li> <li>第三方包</li> <li>webpack运行代码</li></ul> <h3 id="单页面应用"><a href="#单页面应用" aria-hidden="true" class="header-anchor">#</a> 单页面应用:</h3> <ul><li>主业务代码</li> <li>异步模块</li> <li>第三方包</li> <li>webpack运行代码</li></ul> <p>vue-cli3(webpack4) production 模式下
+会自动tree-shaking ：仅打包有被调用的方法
+支持的语法：以下两种
+xxx.js</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code><span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">a</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">a</span><span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><hr> <h2 id="打包速度"><a href="#打包速度" aria-hidden="true" class="header-anchor">#</a> 打包速度</h2> <p>打包结果分析</p> <p>chunks 代码块
+module 模块（文件：图片，css） 模块集合为chunks</p> <p>优化点:
+project:
+减少依赖的嵌套和以用的深度
+尽可能少的处理</p> <p>webpack：
+1.DLL 处理 （将不会变动的模块提前打包）
+2.通过include减少loader范围</p> <h2 id="环境变量传递到业务代码"><a href="#环境变量传递到业务代码" aria-hidden="true" class="header-anchor">#</a> 环境变量传递到业务代码</h2> <p>webpack.dev.config.js</p> <div class="language-JavaScript extra-class"><pre class="language-javascript"><code>plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>DefinePlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token string">'process.env'</span><span class="token punctuation">:</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'../config/dev.env'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span>
+
+</code></pre></div></div> <div class="sticker vuepress-toc"><div class="vuepress-toc-item vuepress-toc-h2 active"><a href="#webpack支持的模块化规范：" title="Webpack支持的模块化规范：">Webpack支持的模块化规范：</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#concept" title="Concept">Concept</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#loader" title="loader">loader</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#plugin" title="plugin">plugin</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#语法糖编译" title="语法糖编译">语法糖编译</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#css编译" title="css编译">css编译</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#style-loader" title="style-loader">style-loader</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#代码分割" title="代码分割">代码分割</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#多页面应用：" title="多页面应用：">多页面应用：</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#单页面应用" title="单页面应用:">单页面应用:</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#打包速度" title="打包速度">打包速度</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#环境变量传递到业务代码" title="环境变量传递到业务代码">环境变量传递到业务代码</a></div></div></div></div> <footer class="footer" data-v-0d113134><div class="footer-left-wrap" data-v-0d113134><ul class="contact" data-v-0d113134><li class="contact-item" data-v-0d113134><a href="https://github.com/ParcoLamperouge/my-blog" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-0d113134><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" data-v-0d113134><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-v-0d113134></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-0d113134><ul class="copyright" data-v-0d113134><li class="copyright-item" data-v-0d113134><a href="https://policies.google.com/privacy?hl=en-US" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-0d113134>Privacy Policy</a></li><li class="copyright-item" data-v-0d113134><a href="/my-blog/2020/03/23/webpack/.html" class="nav-link" data-v-0d113134>MIT Licensed | Copyright © 2018-present Vue.js</a></li></ul></div></footer></div><div class="global-ui"></div></div>
+    <script src="/my-blog/assets/js/app.00e6554a.js" defer></script><script src="/my-blog/assets/js/3.97d5ca3e.js" defer></script><script src="/my-blog/assets/js/4.335d7e7a.js" defer></script><script src="/my-blog/assets/js/16.b2ffbaf1.js" defer></script>
+  </body>
+</html>
